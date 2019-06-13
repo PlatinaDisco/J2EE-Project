@@ -1,9 +1,8 @@
 <template>
-  <el-row>
+  <el-row class = "icon" :style="backgrd" style="height: 900px">
     <el-col :span="8"><div><br/></div></el-col>
-
     <el-col :span="8">
-      <div style="margin-top: 33%">
+      <div style="margin-top: 25%">
         <el-tabs v-model="activeName" type="border-card" >
           <el-tab-pane label="登录" name="login">
             <h2>MyCourses登录</h2>
@@ -41,7 +40,6 @@
         </el-tabs>
       </div>
     </el-col>
-
     <el-col :span="8"><div><br/></div></el-col>
   </el-row>
 </template>
@@ -73,6 +71,11 @@ export default {
       }
     }
     return {
+      backgrd: {
+        backgroundImage: 'url(' + require('../../src/assets/login.jpg') + ')',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100% 100%'
+      },
       activeName: 'login',
       loginForm: {
         login: '',
