@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import DemoPage from './components/DemoPage'
 import LoginRegister from './components/LoginRegister'
+import RegisterValidate from './components/RegisterValidate'
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ export default new Router({
       path: '/login_register',
       name: 'login_register',
       component: LoginRegister
+    },
+    {
+      path: '/register/validate',
+      name: 'register_validate',
+      component: RegisterValidate
     }
   ]
 })

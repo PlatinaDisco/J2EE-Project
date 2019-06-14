@@ -64,7 +64,7 @@ public class LoginServiceImpl implements LoginService {
         user.setValid(false);
         user.setPortrait("default portrait.png");
         userDao.save(user);
-        emailValidation(email, user);
+        emailValidation(email, user, bean.isVue());
     }
 
     @Override
@@ -108,13 +108,14 @@ public class LoginServiceImpl implements LoginService {
         String email = bean.getEmail();
         String id = getId(email);
         userDao.update(id, bean.getPassword(), bean.getName());
-        emailValidation(email, userDao.findOne(id));
+        emailValidation(email, userDao.findOne(id), bean.isVue());
     }
 
-    private void emailValidation(String email, User user) {
+    private void emailValidation(String email, User user, boolean isVue) {
+        String url = isVue ? "http://localhost:8081/#/register/validate?" : "http://localhost:8080/login/validate?";
         EmailUtil.sendEmail(email,
                 "MyCourses 邮箱验证",
-                "请点击<a href='http://localhost:8080/login/validate?" +
+                "请点击<a href='" + url +
                         "token=" + JwtUtil.createJwt(15 * 60 * 1000, user) +
                         "'><b>这里</b></a>" + "验证并登录（15分钟内有效）!");
     }

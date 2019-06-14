@@ -3,14 +3,13 @@ package edu.nju.wsql.controller.vue;
 import edu.nju.wsql.beans.InfoBean;
 import edu.nju.wsql.beans.RegisterBean;
 import edu.nju.wsql.service.LoginService;
+import edu.nju.wsql.service.results.ValidationResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/vue/register")
@@ -20,8 +19,9 @@ public class VueRegisterController {
 
     @PostMapping
     @ResponseBody
-    public InfoBean register(HttpServletRequest request, HttpSession session) {
+    public InfoBean register(HttpServletRequest request) {
         RegisterBean bean = new RegisterBean();
+        bean.setVue(true);
         String password = request.getParameter("password"); bean.setPassword(password);
         String confirmPassword = request.getParameter("confirmPassword"); bean.setConfirmPassword(confirmPassword);
         String name = request.getParameter("name"); bean.setName(name);
@@ -56,5 +56,11 @@ public class VueRegisterController {
                 "邮件已发送至您的邮箱，请前往邮箱验证并登录！",
                 "/login"
         );
+    }
+
+    @GetMapping("/validate")
+    @ResponseBody
+    public ValidationResult validate(@RequestParam String token, HttpServletRequest request, HttpServletResponse response) {
+        return loginService.validate(token);
     }
 }

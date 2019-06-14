@@ -1,0 +1,45 @@
+<template>
+  <div></div>
+</template>
+
+<script>
+import { createCookie } from '../cookie'
+
+export default {
+  name: 'RegisterValidate',
+  mounted: function () {
+    console.log(this.$route)
+    this.$axios({
+      method: 'get',
+      url: 'http://localhost:8080/vue/register/validate?token=' + this.$route.query.token
+    }).then(function (res) {
+      const result = res.data
+      if (result.result === 'ILLEGAL') {
+        this.$alert('非法的邮箱验证！', '验证失败', {
+          confirmButtonText: '返回登录',
+          callback: () => {
+            this.$router.push('/login_register')
+          }
+        })
+      } else if (result.result === 'EXPIRED') {
+        this.$alert('邮箱验证已过期，请重新注册！', '验证失败', {
+          confirmButtonText: '返回登录',
+          callback: () => {
+            this.$router.push('/login_register')
+          }
+        })
+      } else if (result.result === 'SUCCESS') {
+        createCookie('LoginCookie', result.id, 24 * 365)
+        // todo: 跳转学生、教师、管理员界面
+        console.log(result)
+      }
+    }.bind(this)).catch(function (err) {
+      console.log(err)
+    })
+  }
+}
+</script>
+
+<style scoped>
+
+</style>

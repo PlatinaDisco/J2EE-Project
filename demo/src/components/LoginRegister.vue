@@ -46,7 +46,6 @@
 
 <script>
 import { createCookie, readCookie } from '../cookie'
-import { Message } from 'element-ui'
 
 export default {
   name: 'LoginRegister',
@@ -55,8 +54,24 @@ export default {
   methods: {
     login () {
       createCookie('LoginCookie', this.loginForm.login, 24 * 365)
-      alert('登录成功')
       console.log(this.loginForm)
+      this.$axios({
+        method: 'post',
+        url: 'http://localhost:8080/vue/login',
+        params: this.loginForm
+      }).then(function (res) {
+        const result = res.data
+        if (result.result === 'FAILURE') {
+          this.$message.error('用户名不存在或密码错误！')
+        } else if (result.result === 'INVALID') {
+          this.$message.error('未进行邮箱验证或已经注销！')
+        } else if (result.result === 'SUCCESS') {
+          // todo: 跳转学生、教师、管理员界面
+          console.log(result)
+        }
+      }.bind(this)).catch(function (err) {
+        console.log(err)
+      })
     },
     register () {
       this.$refs['registerForm'].validate((valid) => {
@@ -69,11 +84,11 @@ export default {
             const info = res.data
             console.log(info)
             if (info.h1 === '注册失败') {
-              Message.error(info.content)
+              this.$message.error(info.content)
             } else {
-              Message.success(info.content)
+              this.$essage.success(info.content)
             }
-          }).catch(function (err) {
+          }.bind(this)).catch(function (err) {
             console.log(err)
           })
         } else {

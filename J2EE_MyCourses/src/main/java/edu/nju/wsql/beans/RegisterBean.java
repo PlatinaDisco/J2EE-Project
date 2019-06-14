@@ -5,12 +5,14 @@ public class RegisterBean {
     private String confirmPassword;
     private String name;
     private String email;
+    private boolean isVue;
 
     public RegisterBean() {
         password = "";
         confirmPassword = "";
         name = "";
         email = "";
+        isVue = false;
     }
 
     public String getPassword() {
@@ -43,5 +45,13 @@ public class RegisterBean {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isVue() {
+        return isVue;
+    }
+
+    public void setVue(boolean vue) {
+        isVue = vue;
     }
 }
