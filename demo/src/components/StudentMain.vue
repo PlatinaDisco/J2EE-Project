@@ -1,7 +1,7 @@
 <template>
-  <el-container style="height: 900px; border: 1px solid #eee">
+  <el-container style="height: 590px; border: 1px solid #eee">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-      <el-menu :default-openeds="['1', '2']" default-active="/student_main" style="height: 898px">
+      <el-menu :default-openeds="['1', '2']" default-active="/student_main" style="height: 588px">
         <el-link href="/#/student_main">
           <el-menu-item index="/student_main">
            <template slot="title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

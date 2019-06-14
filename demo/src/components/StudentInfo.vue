@@ -1,7 +1,7 @@
 <template>
-  <el-container style="height: 900px; border: 1px solid #eee">
+  <el-container style="height: 590px; border: 1px solid #eee">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-      <el-menu :default-openeds="['1', '2']" style="height: 898px">
+      <el-menu :default-openeds="['1', '2']" style="height: 588px">
         <el-link href="/#/student_main">
           <el-menu-item index="student_main">
             <template slot="title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -35,15 +35,13 @@
         </el-dropdown>
       </el-header>
 
-      <el-main class="info" style="margin-top: 150px">
+      <el-main class="info" style="margin-top: 10px">
         <el-col :span="5"><br/></el-col>
         <el-col :span="16">
-          <el-card class="box-card" style="width: 80%; height: 400px">
-            <div style="font-size: 10px; color: #B3C0D1">
+          <el-card class="box-card" style="width: 80%">
+            <div style="font-size: 10px; color: #B3C0D1; ">
               <i class="el-icon-warning"></i>点击头像可进行更换
             </div>
-            <el-col :span="2"><br/></el-col>
-            <el-col :span="9" style="margin-top: 30px">
               <el-upload
                 class="avatar-uploader"
                 action="https://jsonplaceholder.typicode.com/posts/"
@@ -55,24 +53,19 @@
               </el-upload>
               <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
                 <el-form-item label="姓名">
-                  <el-input v-model="formLabelAlign.name"></el-input>
+                  <el-input v-model="formLabelAlign.name" style="width: 90%"></el-input>
                 </el-form-item>
               </el-form>
-            </el-col>
-            <el-col :span="2"><br/></el-col>
-            <el-col :span="9">
-              <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign" style="margin-top: 100px">
+              <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign" >
                 <el-form-item label="学号">
-                  <el-text v-model="formLabelAlign.studentID"></el-text>
+                  <el-text v-model="formLabelAlign.studentID" style="width: 90%"></el-text>
                 </el-form-item>
-                <el-form-item label="邮箱" style="margin-top:30px">
-                  <el-text v-model="formLabelAlign.email"></el-text>
+                <el-form-item label="邮箱">
+                  <el-text v-model="formLabelAlign.email" style="width: 90%"></el-text>
                 </el-form-item>
-                <el-button type="primary" @click="modify" style="margin-top:70px">保存修改</el-button>
+                <el-button type="primary" @click="modify">保存修改</el-button>
                 <el-button @click="reset" style="margin-left: 30px">重置</el-button>
               </el-form>
-            </el-col>
-            <el-col :span="2"><br/></el-col>
           </el-card>
         </el-col>
         <el-col :span="5"><br/></el-col>
