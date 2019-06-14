@@ -4,6 +4,8 @@ import Home from './views/Home.vue'
 import DemoPage from './components/DemoPage'
 import LoginRegister from './components/LoginRegister'
 import RegisterValidate from './components/RegisterValidate'
+import StudentMain from './components/StudentMain'
+import StudentInfo from './components/StudentInfo'
 
 Vue.use(Router)
 
@@ -36,6 +38,16 @@ export default new Router({
       path: '/register/validate',
       name: 'register_validate',
       component: RegisterValidate
+    },
+    {
+      path: '/student_main',
+      name: 'student_main',
+      component: StudentMain
+    },
+    {
+      path: '/student_info',
+      name: 'student_info',
+      component: StudentInfo
     }
   ]
 })
