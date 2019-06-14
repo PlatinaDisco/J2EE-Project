@@ -2,13 +2,13 @@
   <el-container style="height: 900px; border: 1px solid #eee">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
       <el-menu :default-openeds="['1', '2']" style="height: 898px">
-        <router-link to="/student_main">
-          <el-menu-item index="1">
-            <template slot="title">
-              <i class="el-icon-s-home"></i>主页
+        <el-link href="/#/student_main">
+          <el-menu-item index="student_main">
+            <template slot="title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <i class="el-icon-s-home"></i>主页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </template>
           </el-menu-item>
-        </router-link>
+        </el-link>
         <el-submenu index="2">
           <template slot="title"><i class="el-icon-menu"></i>课程</template>
           <el-menu-item-group>
@@ -27,13 +27,14 @@
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item style="font-size: 15px"><router-link to="/student_info">个人信息</router-link></el-dropdown-item>
+            <el-dropdown-item style="font-size: 15px"><el-link herf="/#/student_info">个人信息</el-link></el-dropdown-item>
             <el-dropdown-item style="font-size: 15px">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
 
       <el-main>
+        学生信息
       </el-main>
     </el-container>
   </el-container>
