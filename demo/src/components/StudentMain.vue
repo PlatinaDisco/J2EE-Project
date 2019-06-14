@@ -53,7 +53,9 @@ export default {
     color: #333;
     line-height: 60px;
   }
-
+  .el-dropdown-link {
+    cursor: pointer;
+  }
   .el-aside {
     color: #333;
   }
