@@ -1,5 +1,5 @@
 <template>
-  <el-row class = "icon" :style="backgrd" style="height: 900px">
+  <el-row class = "icon" :style="backgrd" style="height: 920px">
     <el-col :span="8"><div><br/></div></el-col>
     <el-col :span="8">
       <div style="margin-top: 25%">
