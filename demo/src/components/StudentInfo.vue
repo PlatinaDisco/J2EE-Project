@@ -1,12 +1,12 @@
 <template>
   <el-container style="height: 900px; border: 1px solid #eee">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-      <el-menu :default-openeds="['1', '2']" default-active="1" style="height: 898px">
+      <el-menu :default-openeds="['1', '2']" style="height: 898px">
         <router-link to="/student_main">
           <el-menu-item index="1">
             <template slot="title">
               <i class="el-icon-s-home"></i>主页
-           </template>
+            </template>
           </el-menu-item>
         </router-link>
         <el-submenu index="2">
@@ -27,7 +27,7 @@
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <router-link to="/student_info"><el-dropdown-item style="font-size: 15px">个人信息</el-dropdown-item></router-link>
+            <el-dropdown-item style="font-size: 15px"><router-link to="/student_info">个人信息</router-link></el-dropdown-item>
             <el-dropdown-item style="font-size: 15px">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -41,7 +41,7 @@
 
 <script>
 export default {
-  name: 'StudentMain'
+  name: 'StudentInfo'
 }
 </script>
 

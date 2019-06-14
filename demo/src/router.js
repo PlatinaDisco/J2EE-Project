@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import DemoPage from './components/DemoPage'
 import LoginRegister from './components/LoginRegister'
+import StudentMain from './components/StudentMain'
+import StudentInfo from './components/StudentInfo'
 
 Vue.use(Router)
 
@@ -30,6 +32,16 @@ export default new Router({
       path: '/login_register',
       name: 'login_register',
       component: LoginRegister
+    },
+    {
+      path: '/student_main',
+      name: 'student_main',
+      component: StudentMain
+    },
+    {
+      path: '/student_info',
+      name: 'student_info',
+      component: StudentInfo
     }
   ]
 })
