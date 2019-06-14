@@ -38,10 +38,10 @@
       <el-main class="info" style="margin-top: 150px">
         <el-col :span="5"><br/></el-col>
         <el-col :span="16">
-          <div style="margin-left: -950px; font-size: 10px; color: #B3C0D1">
-            <i class="el-icon-warning"></i>点击头像可进行更换
-          </div>
           <el-card class="box-card" style="width: 80%; height: 400px">
+            <div style="font-size: 10px; color: #B3C0D1">
+              <i class="el-icon-warning"></i>点击头像可进行更换
+            </div>
             <el-col :span="2"><br/></el-col>
             <el-col :span="9" style="margin-top: 30px">
               <el-upload
