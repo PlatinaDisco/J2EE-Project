@@ -32,7 +32,6 @@ public class VueStudentInfoController {
     @PostMapping
     @ResponseBody
     public String modifyInfo(HttpServletRequest request, HttpSession session, MultipartFile portrait) {
-        System.out.println("portrait: "+portrait);
         UserInfoUtil.modify(request, session, portrait, userService, fileService);
         return null;
     }

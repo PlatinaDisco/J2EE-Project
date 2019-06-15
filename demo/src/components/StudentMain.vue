@@ -1,6 +1,6 @@
 <template>
   <el-container style="height: 590px; border: 1px solid #eee">
-    <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+    <el-aside width="200px" class="el-aside">
       <el-menu :default-openeds="['1', '2']" default-active="/student_main" style="height: 588px">
         <el-link href="/#/student_main">
           <el-menu-item index="/student_main">
@@ -20,12 +20,17 @@
     </el-aside>
 
     <el-container>
-      <el-header style="text-align: right; font-size: 24px">
+      <el-header class="el-header">
         <el-dropdown>
-          <span class="el-dropdown-link" style="font-size: 20px; color: aliceblue">
-            <el-image  :src="url" :fit="fit" style="width: 30px; height: 30px"></el-image>
-            {{name}}
-            <i class="el-icon-arrow-down el-icon--right"></i>
+          <span class="el-dropdown-link">
+            <span style="position:relative;">
+              <el-image  :src="url" :fit="fit" style="width: 30px; height: 30px;"></el-image>
+              <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <span style="font-size: 15px; color: aliceblue; position: absolute;top:0; left: 40px">
+                {{name}}
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+            </span>
           </span>
           <el-dropdown-menu slot="dropdown" style="width: 100px">
             <el-link href="/#/student_info">
@@ -69,7 +74,7 @@ export default {
   data () {
     return {
       fit: 'cover',
-      url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+      url: 'http://localhost:8080/img/portrait/default portrait.png',
       name: ''
     }
   }
@@ -81,11 +86,16 @@ export default {
     background-color: #B3C0D1;
     color: #333;
     line-height: 60px;
+    text-align: right;
   }
   .el-dropdown-link {
     cursor: pointer;
+    height: 50px;
+    width: 200px;
+    font-size: 50px;
   }
   .el-aside {
     color: #333;
+    background-color: rgb(238, 241, 246);
   }
 </style>
