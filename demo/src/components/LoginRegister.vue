@@ -66,8 +66,13 @@ export default {
         } else if (result.result === 'INVALID') {
           this.$message.error('未进行邮箱验证或已经注销！')
         } else if (result.result === 'SUCCESS') {
-          // todo: 跳转学生、教师、管理员界面
-          console.log(result)
+          if (result.type === 'STUDENT') {
+            this.$router.push('/student_main')
+          } else if (result.type === 'TEACHER') {
+            this.$router.push('/teacher_main')
+          } else if (result.type === 'ADMINISTRATOR') {
+            this.$router.push('/admin_main')
+          }
         }
       }.bind(this)).catch(function (err) {
         console.log(err)

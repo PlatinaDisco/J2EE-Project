@@ -8,7 +8,6 @@ import { createCookie } from '../cookie'
 export default {
   name: 'RegisterValidate',
   mounted: function () {
-    console.log(this.$route)
     this.$axios({
       method: 'get',
       url: 'http://localhost:8080/vue/register/validate?token=' + this.$route.query.token
@@ -30,8 +29,13 @@ export default {
         })
       } else if (result.result === 'SUCCESS') {
         createCookie('LoginCookie', result.id, 24 * 365)
-        // todo: 跳转学生、教师、管理员界面
-        console.log(result)
+        if (result.type === 'STUDENT') {
+          this.$router.push('/student_main')
+        } else if (result.type === 'TEACHER') {
+          this.$router.push('/teacher_main')
+        } else if (result.type === 'ADMINISTRATOR') {
+          this.$router.push('/admin_main')
+        }
       }
     }.bind(this)).catch(function (err) {
       console.log(err)

@@ -6,6 +6,7 @@ import LoginRegister from './components/LoginRegister'
 import RegisterValidate from './components/RegisterValidate'
 import StudentMain from './components/StudentMain'
 import StudentInfo from './components/StudentInfo'
+import Logout from './components/Logout'
 
 Vue.use(Router)
 
@@ -48,6 +49,11 @@ export default new Router({
       path: '/student_info',
       name: 'student_info',
       component: StudentInfo
+    },
+    {
+      path: '/logout',
+      name: 'logout',
+      component: Logout
     }
   ]
 })

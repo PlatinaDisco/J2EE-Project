@@ -27,10 +27,12 @@
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-link herf="/#/student_info">
+            <el-link href="/#/student_info">
               <el-dropdown-item style="font-size: 15px">个人信息</el-dropdown-item>
             </el-link>
-            <el-dropdown-item style="font-size: 15px">退出登录</el-dropdown-item>
+            <el-link href="/#/logout">
+              <el-dropdown-item style="font-size: 15px">退出登录</el-dropdown-item>
+            </el-link>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -58,13 +60,13 @@
               </el-form>
               <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign" >
                 <el-form-item label="学号">
-                  <el-text v-model="formLabelAlign.studentID" style="width: 90%"></el-text>
+                  <el-input v-model="formLabelAlign.studentID" style="width: 90%" :disabled="true"></el-input>
                 </el-form-item>
                 <el-form-item label="邮箱">
-                  <el-text v-model="formLabelAlign.email" style="width: 90%"></el-text>
+                  <el-input v-model="formLabelAlign.email" style="width: 90%" :disabled="true"></el-input>
                 </el-form-item>
                 <el-button type="primary" @click="modify">保存修改</el-button>
-                <el-button @click="reset" style="margin-left: 30px">重置</el-button>
+                <el-button @click="getInfo" style="margin-left: 30px">重置</el-button>
               </el-form>
           </el-card>
         </el-col>
@@ -77,6 +79,9 @@
 <script>
 export default {
   name: 'StudentInfo',
+  mounted: function () {
+    this.getInfo()
+  },
   data () {
     return {
       imageUrl: '',
@@ -103,6 +108,24 @@ export default {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
       return isJPG && isLt2M
+    },
+    getInfo () {
+      this.$axios({
+        method: 'get',
+        url: 'http://localhost:8080/vue/student/info'
+      }).then(function (res) {
+        const info = res.data
+        this.formLabelAlign.studentID = info.id
+        this.formLabelAlign.email = info.email
+        this.formLabelAlign.name = info.name
+        this.imageUrl = 'http://localhost:8080' + info.portrait
+      }.bind(this)).catch(function (err) {
+        if (err.response.status === 401) {
+          this.$router.push('/login_register')
+        }
+      }.bind(this))
+    },
+    modify () {
     }
   }
 }

@@ -30,7 +30,9 @@
             <el-link href="/#/student_info">
               <el-dropdown-item style="font-size: 15px">个人信息</el-dropdown-item>
             </el-link>
-            <el-dropdown-item style="font-size: 15px">退出登录</el-dropdown-item>
+            <el-link href="/#/logout">
+              <el-dropdown-item style="font-size: 15px">退出登录</el-dropdown-item>
+            </el-link>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
