@@ -1,4 +1,4 @@
-package edu.nju.wsql.filters;
+package edu.nju.wsql.filters.vue;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

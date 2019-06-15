@@ -30,4 +30,25 @@ public class LoginRoleUtil {
         }
         return true;
     }
+
+    public static boolean filterVueLoginRole(ServletRequest req, ServletResponse resp, UserType userType) throws IOException {
+        if (req instanceof HttpServletRequest && resp instanceof HttpServletResponse) {
+            HttpServletRequest httpReq = (HttpServletRequest) req;
+            HttpServletResponse httpResp = (HttpServletResponse) resp;
+            HttpSession session = httpReq.getSession(false);
+            String login = null;
+            UserType type = null;
+            if (session != null) {
+                login = (String) session.getAttribute("login");
+                type = (UserType) session.getAttribute("type");
+            }
+            System.out.println(login);
+            System.out.println(type);
+            if (session == null || login == null || type != userType) {
+                httpResp.setStatus(401);
+                return false;
+            }
+        }
+        return true;
+    }
 }
