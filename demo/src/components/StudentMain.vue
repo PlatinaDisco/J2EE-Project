@@ -23,10 +23,11 @@
       <el-header style="text-align: right; font-size: 24px">
         <el-dropdown>
           <span class="el-dropdown-link" style="font-size: 20px; color: aliceblue">
+            <el-image  :src="url" :fit="fit" style="width: 30px; height: 30px"></el-image>
             StudentID&Name
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
-          <el-dropdown-menu slot="dropdown">
+          <el-dropdown-menu slot="dropdown" style="width: 100px">
             <el-link href="/#/student_info">
               <el-dropdown-item style="font-size: 15px">个人信息</el-dropdown-item>
             </el-link>
@@ -45,7 +46,13 @@
 
 <script>
 export default {
-  name: 'StudentMain'
+  name: 'StudentMain',
+  data () {
+    return {
+      fits: 'cover',
+      url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+    }
+  }
 }
 </script>
 
