@@ -1,4 +1,4 @@
-<template>
+<template title="我的主页">
   <el-container style="height: 590px; border: 1px solid #eee">
     <el-aside width="200px" class="el-aside">
       <el-menu :default-openeds="['1', '2']" default-active="/student_main" style="height: 588px">
@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import { getLoading } from '../loading'
+
 export default {
   name: 'StudentMain',
   mounted: function () {
@@ -57,11 +59,13 @@ export default {
   },
   methods: {
     getInfo () {
+      const loading = getLoading(this)
       this.$axios({
         method: 'get',
         url: 'http://localhost:8080/vue/student/info'
       }).then(function (res) {
         const info = res.data
+        loading.close()
         this.name = info.name
         this.url = 'http://localhost:8080' + info.portrait
       }.bind(this)).catch(function (err) {

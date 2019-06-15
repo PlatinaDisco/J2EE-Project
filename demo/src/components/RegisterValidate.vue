@@ -4,15 +4,18 @@
 
 <script>
 import { createCookie } from '../cookie'
+import { getLoading } from '../loading'
 
 export default {
   name: 'RegisterValidate',
   mounted: function () {
+    const loading = getLoading(this)
     this.$axios({
       method: 'get',
       url: 'http://localhost:8080/vue/register/validate?token=' + this.$route.query.token
     }).then(function (res) {
       const result = res.data
+      loading.close()
       if (result.result === 'ILLEGAL') {
         this.$alert('非法的邮箱验证！', '验证失败', {
           confirmButtonText: '返回登录',

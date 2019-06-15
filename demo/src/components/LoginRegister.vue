@@ -46,6 +46,7 @@
 
 <script>
 import { createCookie, readCookie } from '../cookie'
+import { getLoading } from '../loading'
 
 export default {
   name: 'LoginRegister',
@@ -55,12 +56,14 @@ export default {
     login () {
       createCookie('LoginCookie', this.loginForm.login, 24 * 365)
       console.log(this.loginForm)
+      const loading = getLoading(this)
       this.$axios({
         method: 'post',
         url: 'http://localhost:8080/vue/login',
         params: this.loginForm
       }).then(function (res) {
         const result = res.data
+        loading.close()
         if (result.result === 'FAILURE') {
           this.$message.error('用户名不存在或密码错误！')
         } else if (result.result === 'INVALID') {
@@ -81,6 +84,7 @@ export default {
     register () {
       this.$refs['registerForm'].validate((valid) => {
         if (valid) {
+          const loading = getLoading(this)
           this.$axios({
             method: 'post',
             url: 'http://localhost:8080/vue/register',
@@ -88,6 +92,7 @@ export default {
           }).then(function (res) {
             const info = res.data
             console.log(info)
+            loading.close()
             if (info.h1 === '注册失败') {
               this.$message.error(info.content)
             } else {
@@ -122,6 +127,7 @@ export default {
       }
     }
     return {
+      fullscreenLoading: false,
       backgrd: {
         backgroundImage: 'url(' + require('../../src/assets/login.jpg') + ')',
         backgroundRepeat: 'no-repeat',

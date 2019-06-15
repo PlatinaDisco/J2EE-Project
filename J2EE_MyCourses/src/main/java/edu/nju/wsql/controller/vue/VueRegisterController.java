@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import static edu.nju.wsql.service.results.ValidationResult.Result.SUCCESS;
 
 @Controller
 @RequestMapping("/vue/register")
@@ -61,6 +64,12 @@ public class VueRegisterController {
     @GetMapping("/validate")
     @ResponseBody
     public ValidationResult validate(@RequestParam String token, HttpServletRequest request, HttpServletResponse response) {
-        return loginService.validate(token);
+        ValidationResult result = loginService.validate(token);
+        if (result.getResult() == SUCCESS) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("login", result.getId());
+            session.setAttribute("type", result.getType());
+        }
+        return result;
     }
 }

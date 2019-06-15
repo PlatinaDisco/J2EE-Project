@@ -84,6 +84,8 @@
 </template>
 
 <script>
+import { getLoading } from '../loading'
+
 export default {
   name: 'StudentInfo',
   mounted: function () {
@@ -113,11 +115,13 @@ export default {
       return false
     },
     getInfo () {
+      const loading = getLoading(this)
       this.$axios({
         method: 'get',
         url: 'http://localhost:8080/vue/student/info'
       }).then(function (res) {
         const info = res.data
+        loading.close()
         this.formLabelAlign.studentID = info.id
         this.formLabelAlign.email = info.email
         this.name = this.formLabelAlign.name = info.name
