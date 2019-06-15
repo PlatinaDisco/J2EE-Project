@@ -23,8 +23,8 @@
       <el-header style="text-align: right; font-size: 24px">
         <el-dropdown>
           <span class="el-dropdown-link" style="font-size: 20px; color: aliceblue">
-            <el-image  :src="url" :fit="fit" style="width: 30px; height: 30px"></el-image>
-            StudentID&Name
+            <el-image  :src="url" :fit="fit" style="width: 30px; height: 30px;"></el-image>
+            {{name}}
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown" style="width: 100px">
@@ -46,10 +46,11 @@
               <i class="el-icon-warning"></i>点击头像可进行更换
             </div>
               <el-upload
+                accept="image/*"
                 class="avatar-uploader"
                 action="https://jsonplaceholder.typicode.com/posts/"
                 :show-file-list="false"
-                :on-success="handleAvatarSuccess"
+                :on-change="handleAvatarChange"
                 :before-upload="beforeAvatarUpload">
                 <img v-if="imageUrl" :src="imageUrl" class="avatar">
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -85,7 +86,7 @@ export default {
   },
   data () {
     return {
-      fits: 'cover',
+      fit: 'cover',
       url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
       imageUrl: '',
       labelPosition: 'right',
@@ -93,24 +94,18 @@ export default {
         name: '',
         studentID: '',
         email: ''
-      }
+      },
+      name: '',
+      portrait: null
     }
   },
   methods: {
-    handleAvatarSuccess (res, file) {
+    handleAvatarChange (file) {
       this.imageUrl = URL.createObjectURL(file.raw)
     },
     beforeAvatarUpload (file) {
-      const isJPG = file.type === 'image/jpeg'
-      const isLt2M = file.size / 1024 / 1024 < 2
-
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!')
-      }
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!')
-      }
-      return isJPG && isLt2M
+      this.portrait = file
+      return false
     },
     getInfo () {
       this.$axios({
@@ -120,8 +115,8 @@ export default {
         const info = res.data
         this.formLabelAlign.studentID = info.id
         this.formLabelAlign.email = info.email
-        this.formLabelAlign.name = info.name
-        this.imageUrl = 'http://localhost:8080' + info.portrait
+        this.name = this.formLabelAlign.name = info.name
+        this.url = this.imageUrl = 'http://localhost:8080' + info.portrait
       }.bind(this)).catch(function (err) {
         if (err.response.status === 401) {
           this.$router.push('/login_register')
@@ -129,6 +124,26 @@ export default {
       }.bind(this))
     },
     modify () {
+      let formData = new FormData()
+      formData.append('portrait', this.portrait)
+      formData.append('name', this.formLabelAlign.name)
+      console.log(formData.get('portrait'))
+      this.$axios({
+        method: 'post',
+        url: 'http://localhost:8080/vue/student/info',
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        data: formData
+      }).then(function (res) {
+        console.log(res)
+        this.$message.success('修改成功')
+        this.getInfo()
+      }.bind(this)).catch(function (err) {
+        console.log(err)
+        this.$message.error('修改失败：服务器繁忙，请稍后重试！')
+        this.getInfo()
+      }.bind(this))
     }
   }
 }

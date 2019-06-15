@@ -91,7 +91,7 @@ export default {
             if (info.h1 === '注册失败') {
               this.$message.error(info.content)
             } else {
-              this.$essage.success(info.content)
+              this.$message.success(info.content)
             }
           }.bind(this)).catch(function (err) {
             console.log(err)

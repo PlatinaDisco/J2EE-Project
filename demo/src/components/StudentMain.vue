@@ -24,7 +24,7 @@
         <el-dropdown>
           <span class="el-dropdown-link" style="font-size: 20px; color: aliceblue">
             <el-image  :src="url" :fit="fit" style="width: 30px; height: 30px"></el-image>
-            StudentID&Name
+            {{name}}
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown" style="width: 100px">
@@ -47,10 +47,30 @@
 <script>
 export default {
   name: 'StudentMain',
+  mounted: function () {
+    this.getInfo()
+  },
+  methods: {
+    getInfo () {
+      this.$axios({
+        method: 'get',
+        url: 'http://localhost:8080/vue/student/info'
+      }).then(function (res) {
+        const info = res.data
+        this.name = info.name
+        this.url = 'http://localhost:8080' + info.portrait
+      }.bind(this)).catch(function (err) {
+        if (err.response.status === 401) {
+          this.$router.push('/login_register')
+        }
+      }.bind(this))
+    }
+  },
   data () {
     return {
-      fits: 'cover',
-      url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+      fit: 'cover',
+      url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+      name: ''
     }
   }
 }
