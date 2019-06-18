@@ -1,4 +1,4 @@
-<template title="我的主页">
+<template>
   <el-container style="height: 590px; border: 1px solid #eee">
     <el-aside width="200px" class="el-aside">
       <el-menu :default-openeds="['1', '2']" default-active="/student_main" style="height: 588px">

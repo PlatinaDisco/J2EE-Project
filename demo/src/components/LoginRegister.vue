@@ -127,7 +127,6 @@ export default {
       }
     }
     return {
-      fullscreenLoading: false,
       backgrd: {
         backgroundImage: 'url(' + require('../../src/assets/login.jpg') + ')',
         backgroundRepeat: 'no-repeat',
