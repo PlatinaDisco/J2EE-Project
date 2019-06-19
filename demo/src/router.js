@@ -7,6 +7,10 @@ import RegisterValidate from './components/RegisterValidate'
 import StudentMain from './components/StudentMain'
 import StudentInfo from './components/StudentInfo'
 import Logout from './components/Logout'
+import TeacherMain from './components/TeacherMain'
+import TeacherInfo from './components/TeacherInfo'
+import Try from './components/Try'
+import ClassInfo from './components/ClassInfo'
 
 Vue.use(Router)
 
@@ -68,6 +72,38 @@ let router = new Router({
       component: Logout,
       meta: {
         title: 'MyCourses：退出登录'
+      }
+    },
+    {
+      path: '/TeacherMain',
+      name: 'TeacherMain',
+      component: TeacherMain,
+      meta: {
+        title: 'MyCourses：教师主页'
+      }
+    },
+    {
+      path: '/teacher_info',
+      name: 'teacher_info',
+      component: TeacherInfo,
+      meta: {
+        title: 'MyCourses：教师信息'
+      }
+    },
+    {
+      path: '/try',
+      name: 'try',
+      component: Try,
+      meta: {
+        title: 'MyCourses：教师信息'
+      }
+    },
+    {
+      path: '/ClassInfo',
+      name: 'ClassInfo',
+      component: ClassInfo,
+      meta: {
+        title: 'MyCourses：教师信息'
       }
     }
   ]
